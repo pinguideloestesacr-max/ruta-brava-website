@@ -687,7 +687,7 @@ Availability shown on website: ${availabilityMessage}`
 
           <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-stone-900 via-stone-800 to-black p-8">
             <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Partner Inquiry</p>
-            <h3 className="mt-2 text-2xl font-black">Let's build a referral relationship</h3>
+            <h3 className="mt-2 text-2xl font-black">Let&apos;s build a referral relationship</h3>
             <p className="mt-4 text-sm text-white/65">
               Perfect for hotels, boutique stays, villas, and concierge teams who want a trusted adventure experience to recommend.
             </p>
