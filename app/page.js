@@ -554,7 +554,7 @@ Availability shown on website: ${availabilityMessage}`
             <h2 className="mt-2 text-3xl font-black md:text-4xl">Built for adventure seekers</h2>
           </div>
           <p className="max-w-xl text-sm text-white/60">
-            Ruta Brava currently offers ATV rentals and guided tours, while luxury shuttles and luxury vehicle rentals are part of the brand's future expansion and are not available yet.
+            Ruta Brava currently offers ATV rentals and guided tours, while luxury shuttles and luxury vehicle rentals are part of the brand&apos;s future expansion and are not available yet.
           </p>
         </div>
 
