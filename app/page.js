@@ -417,7 +417,7 @@ Availability shown on website: ${availabilityMessage}`
   }, [heroSlides.length]);
 
   return (
-    <div className="min-h-screen bg-stone-950 text-white">
+    <div className="min-h-screen bg-stone-950 text-white pb-24 md:pb-0">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.20),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(34,197,94,0.12),transparent_30%)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8">
@@ -477,7 +477,7 @@ Availability shown on website: ${availabilityMessage}`
               <h1 className="mt-6 text-5xl font-black uppercase leading-none tracking-tight md:text-7xl">
                 The wild route starts here.
               </h1>
-              <p className="mt-6 max-w-xl text-lg text-white/75">
+              <p className="mt-6 max-w-full sm:max-w-xl text-lg text-white/75">
                 Ruta Brava offers ATV rentals and guided adventure tours in Santa Teresa and Mal País, with luxury shuttles and luxury vehicle rentals planned as upcoming services that are not yet available.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:gap-4">
@@ -500,7 +500,19 @@ Availability shown on website: ${availabilityMessage}`
                   For Hotels & Villas
                 </a>
               </div>
-              <div className="mt-8 grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:max-w-xl">
+              <div className="mb-6 rounded-3xl border border-white/10 bg-white/5 p-5 text-center text-sm text-white/80 sm:hidden">
+                <p className="font-semibold text-white">Reserva rápido desde tu celular</p>
+                <p className="mt-2 text-xs text-white/60">Selecciona fecha, hora y cantidad para ver disponibilidad al instante.</p>
+                <div className="mt-4 grid gap-3">
+                  <a href="#booking" className="rounded-2xl bg-amber-400 px-5 py-3 text-sm font-bold text-stone-950 transition hover:scale-[1.02]">
+                    Reservar ahora
+                  </a>
+                  <a href="https://wa.me/50683898404" className="rounded-2xl border border-white/15 bg-black/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                    Reservar por WhatsApp
+                  </a>
+                </div>
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:max-w-xl">
                 {highlights.map((item) => (
                   <div key={item} className="rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4 text-white/85">
                     {item}
@@ -754,6 +766,31 @@ Availability shown on website: ${availabilityMessage}`
           </p>
         </div>
 
+        <div className="mb-8 rounded-[2rem] border border-white/10 bg-black/20 p-6 sm:p-8 text-white/80">
+          <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Reserva rápida</p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/60">Paso 1</p>
+              <p className="mt-2 text-lg font-bold">Selecciona tu ATV</p>
+              <p className="mt-2 text-sm text-white/60">Elige servicio, fecha, hora y cantidad.</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/60">Paso 2</p>
+              <p className="mt-2 text-lg font-bold">Llena tu info</p>
+              <p className="mt-2 text-sm text-white/60">Nombre, teléfono y lugar de recogida.</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/60">Paso 3</p>
+              <p className="mt-2 text-lg font-bold">Confirma y listo</p>
+              <p className="mt-2 text-sm text-white/60">Recibirás confirmación rápida del equipo.</p>
+            </div>
+          </div>
+          <div className="mt-5 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4 text-sm text-white/90">
+            ¿Quieres reservar ahora mismo? Usa WhatsApp para una atención más rápida.
+            <a href="https://wa.me/50683898404" className="ml-1 font-semibold text-stone-950 underline">Book via WhatsApp</a>
+          </div>
+        </div>
+
         <div className="grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
           <div className="space-y-6">
             <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
@@ -886,19 +923,22 @@ Availability shown on website: ${availabilityMessage}`
               </p>
             </div>
 
-            <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-              <button onClick={handleSubmit} type="button" className="rounded-2xl bg-amber-400 px-6 py-4 font-bold text-stone-950 shadow-lg shadow-amber-400/20 transition hover:scale-[1.02]">
-                Submit booking request
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <button type="submit" className="w-full rounded-2xl bg-amber-400 px-6 py-4 font-bold text-stone-950 shadow-lg shadow-amber-400/20 transition hover:scale-[1.02] active:scale-[0.98]">
+                Book now
               </button>
               <a
+                href="https://wa.me/50683898404"
+                className="w-full rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center font-semibold text-white transition hover:bg-white/10"
+              >
+                Book on WhatsApp
+              </a>
+              <a
                 href={bookingEmailHref}
-                className="rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center font-semibold text-white transition hover:bg-white/10"
+                className="w-full rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center font-semibold text-white transition hover:bg-white/10 sm:col-span-2"
               >
                 Send request by Email
               </a>
-              <button type="button" className="rounded-2xl border border-white/15 bg-white/5 px-6 py-4 font-semibold text-white transition hover:bg-white/10">
-                View full calendar
-              </button>
             </div>
 
             <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/65">
@@ -1144,6 +1184,18 @@ Availability shown on website: ${availabilityMessage}`
           </div>
         </div>
       </section>
+
+      <div className="fixed inset-x-0 bottom-0 z-50 mx-auto max-w-7xl px-4 pb-4 sm:px-6 md:hidden">
+        <div className="flex items-center justify-between gap-3 rounded-3xl border border-white/10 bg-stone-950/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/60">Reserva rápida</p>
+            <p className="text-sm font-bold text-white">Disponible ahora</p>
+          </div>
+          <a href="#booking" className="rounded-2xl bg-amber-400 px-4 py-3 text-sm font-bold text-stone-950 transition hover:scale-[1.02]">
+            Book now
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
