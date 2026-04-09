@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
 
 export default function RutaBravaWebsite() {
   const initialRequests = [
@@ -56,6 +57,7 @@ export default function RutaBravaWebsite() {
   const [submissionState, setSubmissionState] = useState('idle');
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeGalleryTab, setActiveGalleryTab] = useState('photos');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const totalFleet = 6;
   const selectedQuantity = Number(formData.quantity || 0);
 
@@ -418,23 +420,54 @@ Availability shown on website: ${availabilityMessage}`
     <div className="min-h-screen bg-stone-950 text-white">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.20),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(34,197,94,0.12),transparent_30%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 py-8">
-          <nav className="flex items-center justify-between rounded-full border border-white/10 bg-white/5 px-5 py-3 backdrop-blur">
-            <div>
-              <p className="text-lg font-black tracking-[0.25em] uppercase">Ruta Brava</p>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8">
+          <nav className="flex items-center justify-between rounded-full border border-white/10 bg-white/5 px-4 py-3 sm:px-5 backdrop-blur">
+            <div className="flex-1 sm:flex-initial">
+              <p className="text-base sm:text-lg font-black tracking-[0.25em] uppercase">Ruta Brava</p>
               <p className="text-xs text-white/60">Live the wild route</p>
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden gap-6 text-sm text-white/80 md:flex">
-              <a href="#services" className="hover:text-amber-300">Services</a>
-              <a href="#pricing" className="hover:text-amber-300">Pricing</a>
-              <a href="#booking" className="hover:text-amber-300">Booking</a>
-              <a href="#gallery" className="hover:text-amber-300">Gallery</a>
-              <a href="#hotel-partners" className="hover:text-amber-300">Hotels</a>
-              <a href="#about" className="hover:text-amber-300">About</a>
-              <a href="#policies" className="hover:text-amber-300">Policies</a>
-              <a href="#contact" className="hover:text-amber-300">Contact</a>
+              <a href="#services" className="hover:text-amber-300 transition">Services</a>
+              <a href="#pricing" className="hover:text-amber-300 transition">Pricing</a>
+              <a href="#booking" className="hover:text-amber-300 transition">Booking</a>
+              <a href="#gallery" className="hover:text-amber-300 transition">Gallery</a>
+              <a href="#hotel-partners" className="hover:text-amber-300 transition">Hotels</a>
+              <a href="#about" className="hover:text-amber-300 transition">About</a>
+              <a href="#policies" className="hover:text-amber-300 transition">Policies</a>
+              <a href="#contact" className="hover:text-amber-300 transition">Contact</a>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-white/10 transition z-50"
+              aria-label="Toggle menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </nav>
+
+          {/* Mobile Navigation Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-3 rounded-2xl border border-white/10 bg-stone-900/95 backdrop-blur p-4 space-y-3 animate-in fade-in duration-200">
+              <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 rounded-lg transition">Services</a>
+              <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 rounded-lg transition">Pricing</a>
+              <a href="#booking" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 rounded-lg transition">Booking</a>
+              <a href="#gallery" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 rounded-lg transition">Gallery</a>
+              <a href="#hotel-partners" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 rounded-lg transition">Hotels</a>
+              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 rounded-lg transition">About</a>
+              <a href="#policies" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 rounded-lg transition">Policies</a>
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-sm text-white/80 hover:bg-white/10 rounded-lg transition">Contact</a>
+            </div>
+          )}
 
           <div className="grid items-center gap-10 py-20 md:grid-cols-2 md:py-24">
             <div>
@@ -447,29 +480,29 @@ Availability shown on website: ${availabilityMessage}`
               <p className="mt-6 max-w-xl text-lg text-white/75">
                 Ruta Brava offers ATV rentals and guided adventure tours in Santa Teresa and Mal País, with luxury shuttles and luxury vehicle rentals planned as upcoming services that are not yet available.
               </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-3 sm:gap-4">
                 <a
                   href="#booking"
-                  className="rounded-2xl bg-amber-400 px-6 py-4 text-center font-bold text-stone-950 shadow-lg shadow-amber-400/20 transition hover:scale-[1.02]"
+                  className="rounded-2xl bg-amber-400 px-6 sm:px-8 py-4 sm:py-5 text-center font-bold text-stone-950 shadow-lg shadow-amber-400/20 transition hover:scale-[1.02] active:scale-[0.98] min-h-[48px] sm:min-h-[52px] flex items-center justify-center"
                 >
                   Check availability
                 </a>
                 <a
                   href="https://wa.me/50683898404"
-                  className="rounded-2xl bg-amber-400 px-6 py-4 text-center font-bold text-stone-950 shadow-lg shadow-amber-400/20 transition hover:scale-[1.02]"
+                  className="rounded-2xl bg-amber-400 px-6 sm:px-8 py-4 sm:py-5 text-center font-bold text-stone-950 shadow-lg shadow-amber-400/20 transition hover:scale-[1.02] active:scale-[0.98] min-h-[48px] sm:min-h-[52px] flex items-center justify-center"
                 >
                   Book on WhatsApp
                 </a>
                 <a
                   href="#hotel-partners"
-                  className="rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center font-semibold transition hover:bg-white/10"
+                  className="rounded-2xl border border-white/15 bg-white/5 px-6 sm:px-8 py-4 sm:py-5 text-center font-semibold transition hover:bg-white/10 active:bg-white/20 min-h-[48px] sm:min-h-[52px] flex items-center justify-center"
                 >
                   For Hotels & Villas
                 </a>
               </div>
-              <div className="mt-8 grid grid-cols-2 gap-3 text-sm md:max-w-xl">
+              <div className="mt-8 grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:max-w-xl">
                 {highlights.map((item) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/85">
+                  <div key={item} className="rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4 text-white/85">
                     {item}
                   </div>
                 ))}
@@ -499,11 +532,12 @@ Availability shown on website: ${availabilityMessage}`
                           <p className="text-sm uppercase tracking-[0.3em] text-white/45">{heroSlides[activeSlide].subtitle}</p>
                           <div className="mt-6 flex h-52 items-center justify-center rounded-[1.5rem] border border-dashed border-white/15 bg-white/5 text-center text-white/35">
                             <div className="relative h-full w-full">
-                              <img 
-                                src={heroSlides[activeSlide].src} 
-                                alt={heroSlides[activeSlide].title} 
-                                className="h-full w-full rounded-[1.5rem] object-cover"
-                                loading="eager"
+                              <Image
+                                src={heroSlides[activeSlide].src}
+                                alt={heroSlides[activeSlide].title}
+                                fill
+                                className="rounded-[1.5rem] object-cover"
+                                priority
                               />
                               <div className="absolute inset-0 bg-black/30 rounded-[1.5rem]" />
                             </div>
@@ -547,61 +581,61 @@ Availability shown on website: ${availabilityMessage}`
         </div>
       </section>
 
-      <section id="services" className="mx-auto max-w-7xl px-6 py-6">
-        <div className="mb-8 flex items-end justify-between gap-6">
+      <section id="services" className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-12">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Services</p>
-            <h2 className="mt-2 text-3xl font-black md:text-4xl">Built for adventure seekers</h2>
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-amber-300">Services</p>
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-black">Built for adventure seekers</h2>
           </div>
-          <p className="max-w-xl text-sm text-white/60">
+          <p className="text-xs sm:text-sm text-white/60 sm:max-w-xs">
             Ruta Brava currently offers ATV rentals and guided tours, while luxury shuttles and luxury vehicle rentals are part of the brand&apos;s future expansion and are not available yet.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
           {services.map((item) => (
-            <div key={item.title} className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-lg shadow-black/20">
-              <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Ruta Brava</p>
-              <h3 className="mt-3 text-2xl font-bold">{item.title}</h3>
-              <p className="mt-2 text-base text-white/70">{item.subtitle}</p>
-              <p className="mt-5 text-sm leading-6 text-white/60">{item.details}</p>
+            <div key={item.title} className="rounded-2xl sm:rounded-[2rem] border border-white/10 bg-white/5 p-4 sm:p-6 shadow-lg shadow-black/20">
+              <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-amber-300">Ruta Brava</p>
+              <h3 className="mt-3 text-lg sm:text-2xl font-bold">{item.title}</h3>
+              <p className="mt-2 text-sm sm:text-base text-white/70">{item.subtitle}</p>
+              <p className="mt-5 text-xs sm:text-sm leading-6 text-white/60">{item.details}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="pricing" className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-8 xl:grid-cols-2">
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm uppercase tracking-[0.3em] text-amber-300">ATV Rental Pricing</p>
-            <h2 className="mt-3 text-3xl font-black">Current ATV rental rates</h2>
-            <div className="mt-8 space-y-4">
+      <section id="pricing" className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-16">
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 xl:grid-cols-2">
+          <div className="rounded-2xl sm:rounded-[2rem] border border-white/10 bg-white/5 p-4 sm:p-8">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-amber-300">ATV Rental Pricing</p>
+            <h2 className="mt-3 text-2xl sm:text-3xl font-black">Current ATV rental rates</h2>
+            <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
               {rentalPrices.map((item) => (
-                <div key={item.label} className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/20 p-5">
-                  <div>
-                    <p className="text-lg font-bold">{item.label}</p>
-                    <p className="text-sm text-white/50">{item.note}</p>
+                <div key={item.label} className="flex items-center justify-between rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 p-3 sm:p-5 gap-3">
+                  <div className="flex-1">
+                    <p className="text-base sm:text-lg font-bold">{item.label}</p>
+                    <p className="text-xs sm:text-sm text-white/50">{item.note}</p>
                   </div>
-                  <p className="text-2xl font-black text-amber-300">{item.price}</p>
+                  <p className="text-xl sm:text-2xl font-black text-amber-300 flex-shrink-0">{item.price}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-5 text-sm text-white/55">
+            <p className="mt-5 text-xs sm:text-sm text-white/55">
               Helmet included, easy automatic driving, local route tips, and delivery included. Taxes will be added to all listed prices at checkout or final confirmation.
             </p>
           </div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Guided Tour Pricing</p>
-            <h2 className="mt-3 text-3xl font-black">Current guided tour rates</h2>
-            <div className="mt-8 space-y-4">
+          <div className="rounded-2xl sm:rounded-[2rem] border border-white/10 bg-white/5 p-4 sm:p-8">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-amber-300">Guided Tour Pricing</p>
+            <h2 className="mt-3 text-2xl sm:text-3xl font-black">Current guided tour rates</h2>
+            <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
               {tourPrices.map((item) => (
-                <div key={item.label} className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/20 p-5">
-                  <div>
-                    <p className="text-lg font-bold">{item.label}</p>
-                    <p className="text-sm text-white/50">{item.duration} · {item.note}</p>
+                <div key={item.label} className="flex items-center justify-between rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 p-3 sm:p-5 gap-3">
+                  <div className="flex-1">
+                    <p className="text-base sm:text-lg font-bold">{item.label}</p>
+                    <p className="text-xs sm:text-sm text-white/50">{item.duration} · {item.note}</p>
                   </div>
-                  <p className="text-2xl font-black text-amber-300">{item.price}</p>
+                  <p className="text-xl sm:text-2xl font-black text-amber-300 flex-shrink-0">{item.price}</p>
                 </div>
               ))}
             </div>
@@ -644,10 +678,11 @@ Availability shown on website: ${availabilityMessage}`
             {galleryItems[activeGalleryTab].map((item) => (
               <div key={item.title} className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/20">
                 <div className="flex h-56 items-center justify-center border-b border-white/10 bg-white/5 text-center text-white/35">
-                  {item.type === 'Image' ? <img 
-                    src={item.src} 
-                    alt={item.title} 
-                    className="h-full w-full object-cover"
+                  {item.type === 'Image' ? <Image
+                    src={item.src}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
                     loading="lazy"
                   /> : item.type}
                 </div>
@@ -779,10 +814,10 @@ Availability shown on website: ${availabilityMessage}`
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-6 grid gap-4 md:grid-cols-2">
+            <form onSubmit={handleSubmit} className="mt-6 grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
               <div>
-                <label className="mb-2 block text-sm text-white/60">Service</label>
-                <select value={formData.service} onChange={handleChange('service')} className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none">
+                <label className="mb-2 block text-xs sm:text-sm text-white/60">Service</label>
+                <select value={formData.service} onChange={handleChange('service')} className="w-full rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:py-4 text-white outline-none touch-target">
                   <option>ATV Rental</option>
                   <option>Guided ATV Tour</option>
                   <option disabled>Luxury Shuttle · Coming soon</option>
@@ -790,16 +825,16 @@ Availability shown on website: ${availabilityMessage}`
                 </select>
               </div>
               <div>
-                <label className="mb-2 block text-sm text-white/60">Date</label>
-                <input value={formData.date} onChange={handleChange('date')} type="date" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none" />
+                <label className="mb-2 block text-xs sm:text-sm text-white/60">Date</label>
+                <input value={formData.date} onChange={handleChange('date')} type="date" className="w-full rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:py-4 text-white outline-none touch-target" />
               </div>
               <div>
-                <label className="mb-2 block text-sm text-white/60">Time</label>
-                <input value={formData.time} onChange={handleChange('time')} type="time" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none" />
+                <label className="mb-2 block text-xs sm:text-sm text-white/60">Time</label>
+                <input value={formData.time} onChange={handleChange('time')} type="time" className="w-full rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:py-4 text-white outline-none touch-target" />
               </div>
               <div>
-                <label className="mb-2 block text-sm text-white/60">Quantity of ATVs</label>
-                <select value={formData.quantity} onChange={handleChange('quantity')} className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none">
+                <label className="mb-2 block text-xs sm:text-sm text-white/60">Quantity of ATVs</label>
+                <select value={formData.quantity} onChange={handleChange('quantity')} className="w-full rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:py-4 text-white outline-none touch-target">
                   <option value="1">1 ATV</option>
                   <option value="2">2 ATVs</option>
                   <option value="3">3 ATVs</option>
@@ -809,35 +844,35 @@ Availability shown on website: ${availabilityMessage}`
                 </select>
               </div>
               <div>
-                <label className="mb-2 block text-sm text-white/60">Full name</label>
-                <input value={formData.name} onChange={handleChange('name')} type="text" placeholder="Your name" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-white/30 outline-none" />
+                <label className="mb-2 block text-xs sm:text-sm text-white/60">Full name</label>
+                <input value={formData.name} onChange={handleChange('name')} type="text" placeholder="Your name" className="w-full rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:py-4 text-white placeholder:text-white/30 outline-none touch-target" />
               </div>
               <div>
-                <label className="mb-2 block text-sm text-white/60">Phone</label>
-                <input value={formData.phone} onChange={handleChange('phone')} type="tel" placeholder="+506 ..." className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-white/30 outline-none" />
+                <label className="mb-2 block text-xs sm:text-sm text-white/60">Phone</label>
+                <input value={formData.phone} onChange={handleChange('phone')} type="tel" placeholder="+506 ..." className="w-full rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:py-4 text-white placeholder:text-white/30 outline-none touch-target" />
               </div>
-              <div className="md:col-span-2">
-                <label className="mb-2 block text-sm text-white/60">Hotel or pickup location</label>
-                <input value={formData.hotel} onChange={handleChange('hotel')} type="text" placeholder="Hotel, Airbnb, or meeting point" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-white/30 outline-none" />
+              <div className="sm:col-span-2">
+                <label className="mb-2 block text-xs sm:text-sm text-white/60">Hotel or pickup location</label>
+                <input value={formData.hotel} onChange={handleChange('hotel')} type="text" placeholder="Hotel, Airbnb, or meeting point" className="w-full rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:py-4 text-white placeholder:text-white/30 outline-none touch-target" />
               </div>
-              <div className="md:col-span-2">
-                <label className="mb-2 block text-sm text-white/60">Comments</label>
-                <textarea value={formData.comments} onChange={handleChange('comments')} rows="4" placeholder="Add special requests or trip details" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-white/30 outline-none" />
+              <div className="sm:col-span-2">
+                <label className="mb-2 block text-xs sm:text-sm text-white/60">Comments</label>
+                <textarea value={formData.comments} onChange={handleChange('comments')} rows="4" placeholder="Add special requests or trip details" className="w-full rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 px-4 py-3 sm:py-4 text-white placeholder:text-white/30 outline-none resize-none" />
               </div>
-              <div className="md:col-span-2 mt-2 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
+              <div className="sm:col-span-2 mt-2 rounded-xl sm:rounded-2xl border border-white/10 bg-black/20 p-4 sm:p-5 text-xs sm:text-sm text-white/70">
                 <p className="font-bold text-white">Live slot summary</p>
-                <div className="mt-3 grid gap-3 sm:grid-cols-3">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <p className="text-white/45">Confirmed on slot</p>
-                    <p className="mt-1 text-2xl font-black text-amber-300">{slotUsage.confirmed}</p>
+                <div className="mt-3 grid gap-2 sm:gap-3 grid-cols-3">
+                  <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
+                    <p className="text-white/45 text-xs sm:text-sm">Confirmed on slot</p>
+                    <p className="mt-1 text-xl sm:text-2xl font-black text-amber-300">{slotUsage.confirmed}</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <p className="text-white/45">Pending on slot</p>
-                    <p className="mt-1 text-2xl font-black text-amber-300">{slotUsage.pending}</p>
+                  <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
+                    <p className="text-white/45 text-xs sm:text-sm">Pending on slot</p>
+                    <p className="mt-1 text-xl sm:text-2xl font-black text-amber-300">{slotUsage.pending}</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <p className="text-white/45">Available on slot</p>
-                    <p className="mt-1 text-2xl font-black text-amber-300">{slotUsage.available}</p>
+                  <div className="rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4">
+                    <p className="text-white/45 text-xs sm:text-sm">Available on slot</p>
+                    <p className="mt-1 text-xl sm:text-2xl font-black text-amber-300">{slotUsage.available}</p>
                   </div>
                 </div>
               </div>
