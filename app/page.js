@@ -394,7 +394,7 @@ Availability shown on website: ${availabilityMessage}`
                 The Ultimate ATV Adventure Awaits
               </h1>
               <p className="mt-6 max-w-3xl mx-auto text-lg text-white/75">
-                Experience the thrill of Costa Rica's wild routes with premium Honda TRX420 ATVs. From river crossings to jungle trails, guided tours to self-drive rentals – your adventure starts here. Gas included, expert guides, and unforgettable memories guaranteed.
+                Experience the thrill of Costa Rica&apos;s wild routes with premium Honda TRX420 ATVs. From river crossings to jungle trails, guided tours to self-drive rentals – your adventure starts here. Gas included, expert guides, and unforgettable memories guaranteed.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <a
