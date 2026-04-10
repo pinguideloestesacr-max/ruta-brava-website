@@ -4,44 +4,8 @@ import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 
 export default function RutaBravaWebsite() {
-  const initialRequests = [
-    {
-      id: 1,
-      service: 'Guided ATV Tour',
-      date: '2026-04-12',
-      time: '15:00',
-      quantity: 2,
-      name: 'Sunset Guest',
-      phone: '+506 8888 1111',
-      hotel: 'Beach Hotel',
-      comments: 'Sunset route requested',
-      status: 'Confirmed',
-    },
-    {
-      id: 2,
-      service: 'ATV Rental',
-      date: '2026-04-12',
-      time: '09:00',
-      quantity: 1,
-      name: 'Rental Guest',
-      phone: '+506 8888 2222',
-      hotel: 'Villa in Santa Teresa',
-      comments: '24-hour rental',
-      status: 'Confirmed',
-    },
-    {
-      id: 3,
-      service: 'ATV Rental',
-      date: '2026-04-12',
-      time: '10:00',
-      quantity: 1,
-      name: 'Pending Guest',
-      phone: '+506 8888 3333',
-      hotel: 'Mal País Airbnb',
-      comments: 'Waiting for approval',
-      status: 'Confirmed',
-    },
-  ];
+  const initialRequests = [];
+
 
   const [bookingRequests, setBookingRequests] = useState(initialRequests);
   const [formData, setFormData] = useState({
@@ -208,12 +172,12 @@ Availability shown on website: ${availabilityMessage}`
   ];
 
   const fleetStatus = [
-    { id: 'ATV 01', status: 'Booked', client: 'Sunset Tour', date: 'Apr 12' },
-    { id: 'ATV 02', status: 'Booked', client: '24 Hour Rental', date: 'Apr 12' },
-    { id: 'ATV 03', status: 'Pending', client: 'Booking Request', date: 'Apr 12' },
-    { id: 'ATV 04', status: 'Available', client: 'Ready to assign', date: 'Apr 12' },
-    { id: 'ATV 05', status: 'Available', client: 'Ready to assign', date: 'Apr 12' },
-    { id: 'ATV 06', status: 'Available', client: 'Ready to assign', date: 'Apr 12' },
+    { id: 'ATV 01', status: 'Available', client: 'Ready to assign', date: 'Today' },
+    { id: 'ATV 02', status: 'Available', client: 'Ready to assign', date: 'Today' },
+    { id: 'ATV 03', status: 'Available', client: 'Ready to assign', date: 'Today' },
+    { id: 'ATV 04', status: 'Available', client: 'Ready to assign', date: 'Today' },
+    { id: 'ATV 05', status: 'Available', client: 'Ready to assign', date: 'Today' },
+    { id: 'ATV 06', status: 'Available', client: 'Ready to assign', date: 'Today' },
   ];
 
   const bookingStats = dashboardStats;
@@ -415,6 +379,16 @@ Availability shown on website: ${availabilityMessage}`
                 >
                   For Hotels & Partners
                 </a>
+              </div>
+              <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm text-white/80">
+                <a href="#services" className="rounded-full border border-white/10 bg-black/20 px-4 py-2 hover:bg-white/10 transition">Services</a>
+                <a href="#pricing" className="rounded-full border border-white/10 bg-black/20 px-4 py-2 hover:bg-white/10 transition">Pricing</a>
+                <a href="#booking" className="rounded-full border border-white/10 bg-black/20 px-4 py-2 hover:bg-white/10 transition">Booking</a>
+                <a href="#gallery" className="rounded-full border border-white/10 bg-black/20 px-4 py-2 hover:bg-white/10 transition">Gallery</a>
+                <a href="#hotel-partners" className="rounded-full border border-white/10 bg-black/20 px-4 py-2 hover:bg-white/10 transition">Hotels</a>
+                <a href="#about" className="rounded-full border border-white/10 bg-black/20 px-4 py-2 hover:bg-white/10 transition">About</a>
+                <a href="#policies" className="rounded-full border border-white/10 bg-black/20 px-4 py-2 hover:bg-white/10 transition">Policies</a>
+                <a href="#contact" className="rounded-full border border-white/10 bg-black/20 px-4 py-2 hover:bg-white/10 transition">Contact</a>
               </div>
               <div className="mb-6 rounded-3xl border border-white/10 bg-white/5 p-5 text-center text-sm text-white/80 sm:hidden mt-6">
                 <p className="font-semibold text-white">Instant Booking from Your Phone</p>
@@ -775,20 +749,27 @@ Availability shown on website: ${availabilityMessage}`
                 </div>
               </div>
               <div className="mt-5 space-y-3">
-                {bookingRequests.slice(0, 5).map((request) => (
-                  <div key={request.id} className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <p className="font-bold text-white">{request.name} · {request.service}</p>
-                        <p className="text-sm text-white/55">{request.date} · {request.time} · {request.quantity} ATV(s)</p>
-                        <p className="text-sm text-white/55">{request.hotel || 'No hotel provided'} · {request.phone}</p>
-                      </div>
-                      <span className={`inline-flex w-fit rounded-full px-3 py-1 text-xs font-bold ${request.status === 'Confirmed' ? 'bg-green-500/15 text-green-300' : 'bg-amber-400/15 text-amber-300'}`}>
-                        {request.status}
-                      </span>
-                    </div>
+                {bookingRequests.length === 0 ? (
+                  <div className="rounded-2xl border border-white/10 bg-black/20 p-6 text-center text-white/80">
+                    <p className="text-lg font-bold">No reservations right now</p>
+                    <p className="mt-2 text-sm text-white/60">All ATVs are available and ready for booking.</p>
                   </div>
-                ))}
+                ) : (
+                  bookingRequests.slice(0, 5).map((request) => (
+                    <div key={request.id} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                        <div>
+                          <p className="font-bold text-white">{request.name} · {request.service}</p>
+                          <p className="text-sm text-white/55">{request.date} · {request.time} · {request.quantity} ATV(s)</p>
+                          <p className="text-sm text-white/55">{request.hotel || 'No hotel provided'} · {request.phone}</p>
+                        </div>
+                        <span className={`inline-flex w-fit rounded-full px-3 py-1 text-xs font-bold ${request.status === 'Confirmed' ? 'bg-green-500/15 text-green-300' : 'bg-amber-400/15 text-amber-300'}`}>
+                          {request.status}
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
 
