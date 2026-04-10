@@ -39,7 +39,7 @@ export default function RutaBravaWebsite() {
       phone: '+506 8888 3333',
       hotel: 'Mal País Airbnb',
       comments: 'Waiting for approval',
-      status: 'Pending',
+      status: 'Confirmed',
     },
   ];
 
@@ -90,11 +90,11 @@ export default function RutaBravaWebsite() {
   const dashboardStats = useMemo(() => {
     const booked = bookingRequests.filter((request) => request.status === 'Confirmed').reduce((sum, request) => sum + request.quantity, 0);
     const pending = bookingRequests.filter((request) => request.status === 'Pending').reduce((sum, request) => sum + request.quantity, 0);
+    const available = Math.max(totalFleet - booked - pending, 0);
     return [
-      { label: 'Total ATVs', value: String(totalFleet) },
-      { label: 'Booked', value: String(booked) },
-      { label: 'Pending Requests', value: String(pending) },
-      { label: 'Available Now', value: String(Math.max(totalFleet - booked - pending, 0)) },
+      { label: 'Booked', value: `${Math.round((booked / totalFleet) * 100)}%` },
+      { label: 'Pending Requests', value: `${Math.round((pending / totalFleet) * 100)}%` },
+      { label: 'Available Now', value: `${Math.round((available / totalFleet) * 100)}%` },
     ];
   }, [bookingRequests]);
 
@@ -469,7 +469,7 @@ Availability shown on website: ${availabilityMessage}`
             </div>
           )}
 
-          <div className="grid items-center gap-10 py-20 md:grid-cols-2 md:py-24">
+          <div className="flex flex-col gap-10 py-20 md:flex-col md:py-24">
             <div>
               <span className="inline-flex rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
                 ATV Rentals & Tours · Santa Teresa
@@ -525,7 +525,7 @@ Availability shown on website: ${availabilityMessage}`
               <div className="absolute -left-6 top-10 h-24 w-24 rounded-full bg-amber-400/20 blur-2xl" />
               <div className="absolute -right-2 bottom-6 h-24 w-24 rounded-full bg-green-400/20 blur-2xl" />
               <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-2xl backdrop-blur">
-                <div className="relative min-h-[460px] rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-stone-900 via-stone-800 to-black p-6">
+                <div className="relative min-h-[340px] md:min-h-[460px] rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-stone-900 via-stone-800 to-black p-6">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(34,197,94,0.10),transparent_30%)]" />
                   <div className="relative flex h-full flex-col justify-between">
                     <div className="flex items-center justify-between gap-4">
@@ -542,7 +542,7 @@ Availability shown on website: ${availabilityMessage}`
                       <div className="flex h-full flex-col justify-between">
                         <div>
                           <p className="text-sm uppercase tracking-[0.3em] text-white/45">{heroSlides[activeSlide].subtitle}</p>
-                          <div className="mt-6 flex h-52 items-center justify-center rounded-[1.5rem] border border-dashed border-white/15 bg-white/5 text-center text-white/35">
+                          <div className="mt-6 flex h-48 sm:h-52 items-center justify-center rounded-[1.5rem] border border-dashed border-white/15 bg-white/5 text-center text-white/35">
                             <div className="relative h-full w-full">
                               <Image
                                 src={heroSlides[activeSlide].src}
@@ -704,53 +704,6 @@ Availability shown on website: ${availabilityMessage}`
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="hotel-partners" className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-8 xl:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Hotel & Concierge Partners</p>
-            <h2 className="mt-2 text-3xl font-black md:text-4xl">A premium activity partner for hotels, villas, and concierge teams</h2>
-            <p className="mt-4 max-w-2xl text-white/70">
-              Ruta Brava is positioned to work with hotels, luxury villas, property managers, and concierge teams looking for a reliable ATV activity partner in Santa Teresa and Mal País.
-            </p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
-                Premium brand presentation for guest-facing recommendations.
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
-                Guided tours and rentals that can fit curated guest itineraries.
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
-                Professional communication via WhatsApp and Outlook.
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
-                Future scalability for luxury shuttles and premium mobility services.
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-stone-900 via-stone-800 to-black p-8">
-            <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Partner Inquiry</p>
-            <h3 className="mt-2 text-2xl font-black">Let&apos;s build a referral relationship</h3>
-            <p className="mt-4 text-sm text-white/65">
-              Perfect for hotels, boutique stays, villas, and concierge teams who want a trusted adventure experience to recommend.
-            </p>
-            <div className="mt-6 space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">Custom coordination for guest bookings</div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">Premium route storytelling and brand presentation</div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">Direct contact for commissions and concierge support</div>
-            </div>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <a href="mailto:info@rutabravagroup.com?subject=Ruta%20Brava%20Hotel%20Partnership" className="rounded-2xl bg-amber-400 px-6 py-4 text-center font-bold text-stone-950">
-                Contact Partnerships
-              </a>
-              <a href="https://wa.me/50683898404" className="rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center font-semibold text-white transition hover:bg-white/10">
-                WhatsApp Sales
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -1185,11 +1138,58 @@ Availability shown on website: ${availabilityMessage}`
         </div>
       </section>
 
+      <section id="hotel-partners" className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-8 xl:grid-cols-[1fr_0.9fr]">
+          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
+            <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Hotel & Concierge Partners</p>
+            <h2 className="mt-2 text-3xl font-black md:text-4xl">A premium activity partner for hotels, villas, and concierge teams</h2>
+            <p className="mt-4 max-w-2xl text-white/70">
+              Ruta Brava is positioned to work with hotels, luxury villas, property managers, and concierge teams looking for a reliable ATV activity partner in Santa Teresa and Mal País.
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
+                Premium brand presentation for guest-facing recommendations.
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
+                Guided tours and rentals that can fit curated guest itineraries.
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
+                Professional communication via WhatsApp and Outlook.
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-black/20 p-5 text-sm text-white/70">
+                Future scalability for luxury shuttles and premium mobility services.
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-stone-900 via-stone-800 to-black p-8">
+            <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Partner Inquiry</p>
+            <h3 className="mt-2 text-2xl font-black">Let&apos;s build a referral relationship</h3>
+            <p className="mt-4 text-sm text-white/65">
+              Perfect for hotels, boutique stays, villas, and concierge teams who want a trusted adventure experience to recommend.
+            </p>
+            <div className="mt-6 space-y-4">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">Custom coordination for guest bookings</div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">Premium route storytelling and brand presentation</div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/75">Direct contact for commissions and concierge support</div>
+            </div>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <a href="mailto:info@rutabravagroup.com?subject=Ruta%20Brava%20Hotel%20Partnership" className="rounded-2xl bg-amber-400 px-6 py-4 text-center font-bold text-stone-950">
+                Contact Partnerships
+              </a>
+              <a href="https://wa.me/50683898404" className="rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-center font-semibold text-white transition hover:bg-white/10">
+                WhatsApp Sales
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className="fixed inset-x-0 bottom-0 z-50 mx-auto max-w-7xl px-4 pb-4 sm:px-6 md:hidden">
         <div className="flex items-center justify-between gap-3 rounded-3xl border border-white/10 bg-stone-950/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-xl">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-white/60">Reserva rápida</p>
-            <p className="text-sm font-bold text-white">Disponible ahora</p>
+            <p className="text-sm font-bold text-white">rutabrava.cr</p>
           </div>
           <a href="#booking" className="rounded-2xl bg-amber-400 px-4 py-3 text-sm font-bold text-stone-950 transition hover:scale-[1.02]">
             Book now

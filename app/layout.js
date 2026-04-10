@@ -12,14 +12,14 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://rutabravagroup.com'),
+  metadataBase: new URL('https://rutabrava.cr'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://rutabrava.cr/',
   },
   openGraph: {
     title: 'Ruta Brava - ATV Rentals & Guided Tours',
     description: 'Premium ATV rentals and guided adventure tours in Santa Teresa and Mal País, Costa Rica.',
-    url: 'https://rutabravagroup.com',
+    url: 'https://rutabrava.cr',
     siteName: 'Ruta Brava',
     images: [
       {
