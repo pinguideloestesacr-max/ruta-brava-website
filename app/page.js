@@ -55,7 +55,6 @@ export default function RutaBravaWebsite() {
     comments: '',
   });
   const [submissionState, setSubmissionState] = useState('idle');
-  const [activeSlide, setActiveSlide] = useState(0);
   const [activeGalleryTab, setActiveGalleryTab] = useState('photos');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const totalFleet = 6;
@@ -305,81 +304,6 @@ Availability shown on website: ${availabilityMessage}`
     'Payments later: PayPal or Stripe integration connected to bookings table',
   ];
 
-  const heroSlides = [
-    {
-      src: '/images/ruta-brava-atv-river-action.jpg',
-      title: 'River Adventure',
-      subtitle: 'Pure action in the wild route',
-      description: 'High-impact water crossing moments that instantly communicate adventure and excitement.',
-    },
-    {
-      src: '/images/ruta-brava-atv-water-splash.jpg',
-      title: 'Splash Through the Route',
-      subtitle: 'Adrenaline in every ride',
-      description: 'Action-driven visuals designed to make Ruta Brava feel bold, dynamic, and unforgettable.',
-    },
-    {
-      src: '/images/ruta-brava-atv-group-river.jpg',
-      title: 'Guided Group Experience',
-      subtitle: 'Adventure shared with friends',
-      description: 'Showcases guided experiences, group energy, and scenic river routes in Santa Teresa and Mal País.',
-    },
-    {
-      src: '/images/ruta-brava-atv-road-tour.jpg',
-      title: 'Road Tour Moments',
-      subtitle: 'More than jungle trails',
-      description: 'Highlights route variety and gives the brand a broader premium mobility feel.',
-    },
-    {
-      src: '/images/ruta-brava-atv-jungle-trail.jpg',
-      title: 'Jungle Trails',
-      subtitle: 'Deep nature, premium adventure',
-      description: 'The tropical route experience with a stronger editorial and destination-driven aesthetic.',
-    },
-    {
-      src: '/images/ruta-brava-happy-rider-closeup.jpg',
-      title: 'Happy Riders',
-      subtitle: 'Real smiles, real memories',
-      description: 'Close-up emotion shots that help future guests imagine themselves living the experience.',
-    },
-    {
-      src: '/images/ruta-brava-happy-rider-2.jpg',
-      title: 'Adventure You Can Feel',
-      subtitle: 'Lifestyle meets adrenaline',
-      description: 'Human-centered storytelling that balances the rugged route with a clean luxury feel.',
-    },
-    {
-      src: '/images/ruta-brava-atv-beach.jpg',
-      title: 'Beachfront Route',
-      subtitle: 'Santa Teresa energy',
-      description: 'Ocean-facing visuals that connect Ruta Brava with the destination and elevate brand perception.',
-    },
-    {
-      src: '/images/ruta-brava-ocean-view-experience.jpg',
-      title: 'Ocean View Moments',
-      subtitle: 'More than a rental, a memory',
-      description: 'Editorial lifestyle imagery that positions the experience as aspirational and share-worthy.',
-    },
-    {
-      src: '/images/ruta-brava-sunset-tour.jpg',
-      title: 'Sunset Tour',
-      subtitle: 'Golden-hour unforgettable rides',
-      description: 'Scenic ending visuals that add emotional depth and premium tour appeal.',
-    },
-    {
-      src: '/images/ruta-brava-brand-flag.jpg',
-      title: 'Ruta Brava Brand Presence',
-      subtitle: 'Confidence in every booking',
-      description: 'Branding visuals help communicate credibility, professionalism, and a stronger company identity.',
-    },
-    {
-      src: '/images/ruta-brava-group-lifestyle.jpg',
-      title: 'Lifestyle Experience',
-      subtitle: 'Travel, freedom, connection',
-      description: 'A final slide that reinforces what Ruta Brava really sells: a premium tropical experience.',
-    },
-  ];
-
   const galleryTabs = [
     { id: 'photos', label: 'Photos' },
     { id: 'videos', label: 'Videos' },
@@ -407,14 +331,6 @@ Availability shown on website: ${availabilityMessage}`
       { title: 'Group Experience Reel', type: 'Video', src: 'Add your video thumbnail here' },
     ],
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroSlides.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [heroSlides.length]);
 
   return (
     <div className="min-h-screen bg-stone-950 text-white pb-24 md:pb-0">
@@ -469,124 +385,55 @@ Availability shown on website: ${availabilityMessage}`
             </div>
           )}
 
-          <div className="flex flex-col gap-10 py-20 md:flex-col md:py-24">
-            <div>
+          <div className="flex flex-col gap-10 py-20 md:py-24 items-center text-center">
+            <div className="max-w-4xl">
               <span className="inline-flex rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-amber-300">
-                ATV Rentals & Tours · Santa Teresa
+                ATV Rentals & Tours · Santa Teresa & Mal País
               </span>
               <h1 className="mt-6 text-5xl font-black uppercase leading-none tracking-tight md:text-7xl">
-                The wild route starts here.
+                The Ultimate ATV Adventure Awaits
               </h1>
-              <p className="mt-6 max-w-full sm:max-w-xl text-lg text-white/75">
-                Ruta Brava offers ATV rentals and guided adventure tours in Santa Teresa and Mal País, with luxury shuttles and luxury vehicle rentals planned as upcoming services that are not yet available.
+              <p className="mt-6 max-w-3xl mx-auto text-lg text-white/75">
+                Experience the thrill of Costa Rica's wild routes with premium Honda TRX420 ATVs. From river crossings to jungle trails, guided tours to self-drive rentals – your adventure starts here. Gas included, expert guides, and unforgettable memories guaranteed.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:gap-4">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <a
                   href="#booking"
                   className="rounded-2xl bg-amber-400 px-6 sm:px-8 py-4 sm:py-5 text-center font-bold text-stone-950 shadow-lg shadow-amber-400/20 transition hover:scale-[1.02] active:scale-[0.98] min-h-[48px] sm:min-h-[52px] flex items-center justify-center"
                 >
-                  Check availability
+                  Check Availability Now
                 </a>
                 <a
                   href="https://wa.me/50683898404"
                   className="rounded-2xl bg-amber-400 px-6 sm:px-8 py-4 sm:py-5 text-center font-bold text-stone-950 shadow-lg shadow-amber-400/20 transition hover:scale-[1.02] active:scale-[0.98] min-h-[48px] sm:min-h-[52px] flex items-center justify-center"
                 >
-                  Book on WhatsApp
+                  Book via WhatsApp
                 </a>
                 <a
                   href="#hotel-partners"
                   className="rounded-2xl border border-white/15 bg-white/5 px-6 sm:px-8 py-4 sm:py-5 text-center font-semibold transition hover:bg-white/10 active:bg-white/20 min-h-[48px] sm:min-h-[52px] flex items-center justify-center"
                 >
-                  For Hotels & Villas
+                  For Hotels & Partners
                 </a>
               </div>
-              <div className="mb-6 rounded-3xl border border-white/10 bg-white/5 p-5 text-center text-sm text-white/80 sm:hidden">
-                <p className="font-semibold text-white">Reserva rápido desde tu celular</p>
-                <p className="mt-2 text-xs text-white/60">Selecciona fecha, hora y cantidad para ver disponibilidad al instante.</p>
+              <div className="mb-6 rounded-3xl border border-white/10 bg-white/5 p-5 text-center text-sm text-white/80 sm:hidden mt-6">
+                <p className="font-semibold text-white">Instant Booking from Your Phone</p>
+                <p className="mt-2 text-xs text-white/60">Select date, time, and ATV quantity to check real-time availability.</p>
                 <div className="mt-4 grid gap-3">
                   <a href="#booking" className="rounded-2xl bg-amber-400 px-5 py-3 text-sm font-bold text-stone-950 transition hover:scale-[1.02]">
-                    Reservar ahora
+                    Book Now
                   </a>
                   <a href="https://wa.me/50683898404" className="rounded-2xl border border-white/15 bg-black/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-                    Reservar por WhatsApp
+                    WhatsApp Booking
                   </a>
                 </div>
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:max-w-xl">
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6 text-xs sm:text-sm">
                 {highlights.map((item) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4 text-white/85">
+                  <div key={item} className="rounded-2xl border border-white/10 bg-white/5 p-3 sm:p-4 text-white/85 text-center">
                     {item}
                   </div>
                 ))}
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="absolute -left-6 top-10 h-24 w-24 rounded-full bg-amber-400/20 blur-2xl" />
-              <div className="absolute -right-2 bottom-6 h-24 w-24 rounded-full bg-green-400/20 blur-2xl" />
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-2xl backdrop-blur">
-                <div className="relative min-h-[340px] md:min-h-[460px] rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-stone-900 via-stone-800 to-black p-6">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(34,197,94,0.10),transparent_30%)]" />
-                  <div className="relative flex h-full flex-col justify-between">
-                    <div className="flex items-center justify-between gap-4">
-                      <div>
-                        <p className="text-sm uppercase tracking-[0.3em] text-amber-300">Featured Slideshow</p>
-                        <h2 className="mt-2 text-3xl font-black">{heroSlides[activeSlide].title}</h2>
-                      </div>
-                      <div className="rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-bold text-amber-300">
-                        Auto slider
-                      </div>
-                    </div>
-
-                    <div className="mt-6 flex-1 rounded-[1.5rem] border border-white/10 bg-black/30 p-8">
-                      <div className="flex h-full flex-col justify-between">
-                        <div>
-                          <p className="text-sm uppercase tracking-[0.3em] text-white/45">{heroSlides[activeSlide].subtitle}</p>
-                          <div className="mt-6 flex h-48 sm:h-52 items-center justify-center rounded-[1.5rem] border border-dashed border-white/15 bg-white/5 text-center text-white/35">
-                            <div className="relative h-full w-full">
-                              <Image
-                                src={heroSlides[activeSlide].src}
-                                alt={heroSlides[activeSlide].title}
-                                fill
-                                className="rounded-[1.5rem] object-cover"
-                                priority
-                              />
-                              <div className="absolute inset-0 bg-black/30 rounded-[1.5rem]" />
-                            </div>
-                          </div>
-                        </div>
-                        <p className="mt-6 text-white/70">{heroSlides[activeSlide].description}</p>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 flex items-center justify-between gap-4">
-                      <div className="flex gap-2">
-                        {heroSlides.map((slide, index) => (
-                          <button
-                            key={slide.title}
-                            onClick={() => setActiveSlide(index)}
-                            className={`h-3 w-8 rounded-full transition ${index === activeSlide ? 'bg-amber-300' : 'bg-white/20'}`}
-                            aria-label={`Go to slide ${index + 1}`}
-                          />
-                        ))}
-                      </div>
-                      <div className="grid grid-cols-3 gap-3 text-center text-sm">
-                        <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                          <p className="font-bold">4x4</p>
-                          <p className="text-white/55">Power</p>
-                        </div>
-                        <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                          <p className="font-bold">2 Pax</p>
-                          <p className="text-white/55">Comfort</p>
-                        </div>
-                        <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                          <p className="font-bold">Guide</p>
-                          <p className="text-white/55">Tours</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
